@@ -2,6 +2,8 @@
 package frames.account;
 
 import frames.Main;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import service.account.AccService;
 
 public class Authorization extends javax.swing.JFrame {
@@ -27,6 +29,17 @@ public class Authorization extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Authorization");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
+
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPanel1KeyReleased(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -36,11 +49,21 @@ public class Authorization extends javax.swing.JFrame {
 
         loginFld.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         loginFld.setName("login"); // NOI18N
+        loginFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                loginFldKeyReleased(evt);
+            }
+        });
 
         jLabel3.setText("Password:");
 
         passFld.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         passFld.setName("password"); // NOI18N
+        passFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                passFldKeyReleased(evt);
+            }
+        });
 
         completeBtn.setText("Complete");
         completeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -126,11 +149,31 @@ public class Authorization extends javax.swing.JFrame {
     }//GEN-LAST:event_registrationBtnActionPerformed
 
     private void completeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeBtnActionPerformed
+        authorization();
+    }//GEN-LAST:event_completeBtnActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) authorization();
+    }//GEN-LAST:event_formKeyReleased
+
+    private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) authorization();
+    }//GEN-LAST:event_jPanel1KeyReleased
+
+    private void passFldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passFldKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) authorization();
+    }//GEN-LAST:event_passFldKeyReleased
+
+    private void loginFldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginFldKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) KeyboardFocusManager.getCurrentKeyboardFocusManager().focusNextComponent();
+    }//GEN-LAST:event_loginFldKeyReleased
+
+    private void authorization(){
         if(!accService.authentication(jPanel1)) return;
         this.dispose();
         new Main().setVisible(true);
-    }//GEN-LAST:event_completeBtnActionPerformed
-
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton completeBtn;
     private javax.swing.JLabel jLabel1;
